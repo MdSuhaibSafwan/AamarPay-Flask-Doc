@@ -3,6 +3,7 @@ from flask import jsonify
 from . import app
 from .utils import get_payment_url
 
+
 @app.route("/", methods=["GET", ])
 def index_page():
 
