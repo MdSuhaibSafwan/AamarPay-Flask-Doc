@@ -12,4 +12,8 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///aamarpay.db"
 
 db = SQLAlchemy(app=app)
 
+with app.app_context():
+    db.create_all()
+
+
 from . import routes

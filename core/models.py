@@ -1,5 +1,5 @@
 import secrets
-from . import db
+from core import db
 from datetime import datetime
 
 
