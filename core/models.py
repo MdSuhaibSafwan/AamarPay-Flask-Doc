@@ -1,3 +1,4 @@
+import secrets
 from . import db
 from datetime import datetime
 
@@ -14,7 +15,21 @@ class User(db.Model):
 
 class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    transaction_id = db.Column(db.String(100), unique=True, nullable=False)
+    transaction_id = db.Column(db.String(100), unique=True, nullable=False, default=secrets.token_hex)
+    
+    amount = db.Column(db.Float, nullable=False)
+    currency = db.Column(db.String(10), nullable=False)
+    description = db.Column(db.Text)
+    customer_name = db.Column(db.String(100),)
+    customer_email = db.Column(db.String(100),)
+    customer_address1 = db.Column(db.Text)
+    customer_address2 = db.Column(db.Text)
+    customer_city = db.Column(db.String(100),)
+    customer_state = db.Column(db.String(100),)
+    customer_postcode = db.Column(db.String(100),)
+    customer_country = db.Column(db.String(100),)
+    customer_phone = db.Column(db.String(100),)
+    
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     user_transactions = db.relationship('User', backref=db.backref('transactions', lazy=True))
 
