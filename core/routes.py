@@ -12,7 +12,7 @@ def index_page():
 @app.route("/products/", methods=["GET", ])
 def product_page():
 
-    return render_template("main/products.html")
+    return render_template("main/product-list.html")
 
 
 @app.route("/product-detail/<pk>/", methods=["GET", ])
@@ -30,7 +30,7 @@ def checkout_page():
         return redirect()
 
 
-    return render_template("main/checkout.html", )
+    return render_template("main/checkout/checkout.html", )
 
 
 @app.route("/checkout/success/", methods=["POST", "GET"])
@@ -38,7 +38,7 @@ def success_page():
     data = request.values.to_dict()
     print("data received ", data)
 
-    return render_template("main/success.html")
+    return render_template("main/checkout/success.html")
 
 
 @app.route("/checkout/failure/", methods=["POST", ])
@@ -46,7 +46,7 @@ def failure_page():
     data = request.values.to_dict()
     print("data received ", data)
 
-    return render_template("main/failure.html")
+    return render_template("main/checkout/failure.html")
 
 
 @app.route("/checkout/cancel/", methods=["POST", ])
@@ -54,4 +54,4 @@ def cancel_page():
     data = request.values.to_dict()
     print("data received ", data)
 
-    return render_template("main/cancel.html")
+    return render_template("main/checkout/cancel.html")
