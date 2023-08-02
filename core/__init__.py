@@ -11,3 +11,5 @@ app.config["SECRET_KEY"] = secrets.token_hex()
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///aamarpay.db"
 
 db = SQLAlchemy(app=app)
+
+from . import routes
