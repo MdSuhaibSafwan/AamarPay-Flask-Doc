@@ -9,7 +9,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ product.title }}</h5>
                 <p class="card-text">{{ product.description }}</p>
-                <a href="#" class="btn btn-primary">See More</a>
+                <a href="{{ url_for('product_detail_page', pk=product.id) }}" class="btn btn-primary">See More</a>
               </div>
           </div>
         {% endfor %}
