@@ -1,26 +1,23 @@
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, abort
 from flask import jsonify
 from . import app
 from .utils import get_payment_url
+from core.models import User, Product, Transaction
 
 
 @app.route("/", methods=["GET", ])
-def index_page():
-
-    return render_template("main/index.html")
-
-
-@app.route("/products/", methods=["GET", ])
 def product_page():
-
-    return render_template("main/product-list.html")
+    products = Product.query.all()
+    return render_template("main/product-list.html", products=products)
 
 
 @app.route("/product-detail/<pk>/", methods=["GET", ])
 def product_detail_page(pk):
-    print("pk ", pk)
+    product = Product.query.filter_by(id=pk).first()
+    if product is None:
+        raise abort(404)
 
-    return render_template("main/product-detail.html")
+    return render_template("main/product-detail.html", product=product)
 
 
 @app.route("/product/checkout/", methods=["POST", "GET"])
@@ -30,8 +27,15 @@ def checkout_page():
 
         return redirect()
 
+    product_id = request.args.get("product_id", None)
+    if not product_id:
+        abort(403)
 
-    return render_template("main/checkout/checkout.html", )
+    product = Product.query.filter_by(id=product_id).first()
+    if not product:
+        raise abort(404)
+
+    return render_template("main/checkout/checkout.html", product=product)
 
 
 @app.route("/checkout/success/", methods=["POST", "GET"])

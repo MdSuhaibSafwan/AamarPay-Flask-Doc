@@ -12,6 +12,8 @@
     <title>{% if title %} {{title}} {% else %} Aamarpay Gateway Flask {% endif %}</title>
   </head>
   <body class="container">
+    {% include "components/navbar.html" %}
+
     {% block content %}
 
 
