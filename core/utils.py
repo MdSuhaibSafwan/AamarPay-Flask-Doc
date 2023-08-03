@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 env = load_dotenv(".env")
 print(env)
 
+
 def get_payment_url(transaction_inst, product):
     payload = {
         "store_id": os.getenv("AAMARPAY_STORE_ID"),
@@ -37,4 +38,12 @@ def get_payment_url(transaction_inst, product):
 
     r = requests.post(url, data=data)
 
+    return r.json()
+
+
+def search_transaction(merchant_id):
+    store_id = os.getenv("AAMARPAY_STORE_ID")
+    signature_key = os.getenv("AAMARPAY_SIGNATURE_KEY")
+    url = f"http://sandbox.aamarpay.com/api/v1/trxcheck/request.php?request_id={merchant_id}&store_id={store_id}&signature_key={signature_key}&type=json"
+    r = requests.get(url)
     return r.json()

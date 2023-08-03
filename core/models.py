@@ -31,12 +31,6 @@ class Transaction(db.Model):
     customer_country = db.Column(db.String(100),)
     customer_phone = db.Column(db.String(100),)
     
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
-    user_transactions = db.relationship('User', backref=db.backref('transactions', lazy=True))
-
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
-    product_transactions = db.relationship('Product', backref=db.backref('prod_transactions', lazy=True))
-
     # Payment Gateway (PG) section  
     pg_txnid = db.Column(db.Text)
     epw_txnid = db.Column(db.Text)
@@ -44,6 +38,12 @@ class Transaction(db.Model):
     pg_service_charge_bdt = db.Column(db.Text)
     card_number = db.Column(db.Text)
     bank_txn = db.Column(db.Text)
+
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
+    user_transactions = db.relationship('User', backref=db.backref('transactions', lazy=True))
+
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    product_transactions = db.relationship('Product', backref=db.backref('prod_transactions', lazy=True))
 
     def __repr__(self):
         return "<Transaction %r>" % self.transaction_id

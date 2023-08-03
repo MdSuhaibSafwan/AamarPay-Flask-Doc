@@ -1,9 +1,11 @@
 from flask import render_template, request, redirect, abort, session
 from flask import jsonify
 from . import app, db
-from .utils import get_payment_url
+from .utils import get_payment_url, search_transaction
 from core.models import User, Product, Transaction
 
+fail_code = 7
+success_code = 2
 
 @app.route("/", methods=["GET", ])
 def product_page():
@@ -62,6 +64,12 @@ def success_page():
     if transaction_inst is None:
         raise abort(404)
     
+    search_data = search_transaction(transaction_id)
+
+    pg_status_code = int(search_data.get("status_code"))
+    if pg_status_code != success_code:
+        raise abort(403)
+
     transaction_inst.pg_txnid = data.get("pg_txnid")
     transaction_inst.epw_txnid = data.get("epw_txnid")
     transaction_inst.card_type = data.get("card_type")
@@ -82,6 +90,13 @@ def failure_page():
     transaction_inst = Transaction.query.filter_by(transaction_id=transaction_id).first()
     if transaction_inst is None:
         raise abort(404)
+    
+
+    search_data = search_transaction(transaction_id)
+
+    pg_status_code = int(search_data.get("status_code"))
+    if pg_status_code != fail_code:
+        raise abort(403)
     
     transaction_inst.pg_txnid = data.get("pg_txnid")
     transaction_inst.epw_txnid = data.get("epw_txnid")
