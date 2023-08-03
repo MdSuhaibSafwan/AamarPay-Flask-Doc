@@ -7,6 +7,7 @@ from core.models import User, Product, Transaction
 fail_code = 7
 success_code = 2
 
+
 @app.route("/", methods=["GET", ])
 def product_page():
     products = Product.query.all()
@@ -57,6 +58,7 @@ def checkout_page():
 
 @app.route("/checkout/success/", methods=["POST", ])
 def success_page():
+    print("Inside Success")
     data = request.values.to_dict()
     print("data received ", data)
     transaction_id = data["mer_txnid"]
@@ -84,6 +86,7 @@ def success_page():
 
 @app.route("/checkout/failure/", methods=["POST", ])
 def failure_page():
+    print("Inside Failure")
     data = request.values.to_dict()
     print("data received ", data)
     transaction_id = data["mer_txnid"]
@@ -112,6 +115,7 @@ def failure_page():
 
 @app.route("/checkout/cancel/", methods=["POST", ])
 def cancel_page():
+    print("Inside Cancel")
     data = request.values.to_dict()
     print("data received ", data)
     transaction_id = data["mer_txnid"]
