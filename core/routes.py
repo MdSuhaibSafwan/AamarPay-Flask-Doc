@@ -43,7 +43,8 @@ def checkout_page():
         phone = data.get("phone")
         zip_code = data.get("zip_code")
 
-        transaction_inst = Transaction(customer_name=name, customer_email=email, customer_address1=address, customer_address2=address,
+        transaction_inst = Transaction(
+            customer_name=name, customer_email=email, customer_address1=address, customer_address2=address,
             customer_city=city, customer_state=country, customer_country=country, customer_postcode=zip_code, customer_phone=phone, 
             currency="BDT", amount=product.price, product_id=product.id)
 
