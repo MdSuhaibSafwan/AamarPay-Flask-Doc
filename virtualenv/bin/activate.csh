@@ -8,7 +8,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/media/safwan/New Volume/Python/AamarPay/AamarPay Pg Gateway Flask/virtualenv"
+setenv VIRTUAL_ENV "/home/safwan/Desktop/Python/AamarPay/AamarPay Pg Gateway Flask/virtualenv"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"

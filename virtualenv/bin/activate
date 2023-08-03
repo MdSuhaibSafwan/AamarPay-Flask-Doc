@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/media/safwan/New Volume/Python/AamarPay/AamarPay Pg Gateway Flask/virtualenv"
+VIRTUAL_ENV="/home/safwan/Desktop/Python/AamarPay/AamarPay Pg Gateway Flask/virtualenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
