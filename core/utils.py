@@ -5,8 +5,6 @@ from flask import url_for, request
 from dotenv import load_dotenv
 
 env = load_dotenv(".env")
-print(env)
-
 
 def get_payment_url(transaction_inst, product):
     payload = {

@@ -1,8 +1,5 @@
 import secrets
 from flask import Flask
-from flask import (
-    render_template, url_for, flash, redirect
-)
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
@@ -16,7 +13,6 @@ bcrypt = Bcrypt(app)
 
 with app.app_context():
     db.create_all()
-    print("Created")
 
 
 from . import routes
