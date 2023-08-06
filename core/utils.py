@@ -37,11 +37,15 @@ def get_payment_url(transaction_inst, product):
     url = "https://sandbox.aamarpay.com/jsonpost.php"
 
     r = requests.post(url, data=data)
+    res_data = r.json()
+    result = res_data.get("result", None)
+    if not result:
+        r.status_code = 400
+    
+    return res_data, r.status_code
 
-    return r.json()
 
-
-def search_transaction(merchant_id):
+def verify_transaction(merchant_id):
     store_id = os.getenv("AAMARPAY_STORE_ID")
     signature_key = os.getenv("AAMARPAY_SIGNATURE_KEY")
     url = f"http://sandbox.aamarpay.com/api/v1/trxcheck/request.php?request_id={merchant_id}&store_id={store_id}&signature_key={signature_key}&type=json"
